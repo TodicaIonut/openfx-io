@@ -195,7 +195,7 @@ enum EOutputOrientation {
 #define kParamOutputCompressionOptionB44a "b44a", "Lossy 4-by-4 pixel block compression, flat fields are compressed more [EXR]", "b44a"
 #define kParamOutputCompressionOptionDWAa "dwaa", "lossy DCT based compression, in blocks of 32 scanlines. More efficient for partial buffer access. [EXR]", "dwaa"
 #define kParamOutputCompressionOptionDWAb "dwab", "lossy DCT based compression, in blocks of 256 scanlines. More efficient space wise and faster to decode full frames than DWAA. [EXR]", "dwab"
-#define kParamOutputCompressionOptionDWAb "zstd", "zstd compression (lossless). [EXR]", "zstd"
+#define kParamOutputCompressionOptionDWAb "zstd", "zstd compression (lossless). not yet support, before OpenEXR 4.0 [EXR]", "zstd"
 #define kParamOutputCompressionOptionLZW "lzw", "Lempel-Ziv Welsch compression (lossless) [TIFF]", "lzw"
 #define kParamOutputCompressionOptionCCITTRLE "ccittrle", "CCITT modified Huffman RLE (lossless) [TIFF]", "ccittrle"
 #define kParamOutputCompressionOptionJPEG "jpeg", "JPEG [TIFF]", "jpeg"
