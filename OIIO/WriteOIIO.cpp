@@ -129,6 +129,12 @@ enum ETuttlePluginComponents {
     "Compression level for zip/deflate compression, on a scale from 1 (fastest, minimal compression) to 9 (slowest, maximal compression) [EXR, TIFF or Zfile w/ zip or zips comp.]"
 #define kParamOutputZIPCompressionLevelDefault 4
 
+#define kParamOutputZIPCompressionLevel "ZSTDCompressionLevel"
+#define kParamOutputZIPCompressionLevelLabel "ZSTD Compression Level"
+#define kParamOutputZIPCompressionLevelHint \
+    "Compression level for Zstandard compression, on a scale from 1 (fastest, minimal compression) to 22 (slowest, maximal compression) [EXR w/ ZSTD comp.]"
+#define kParamOutputZIPCompressionLevelDefault 5
+
 #define kParamOutputOrientation "orientation"
 #define kParamOutputOrientationLabel "Orientation"
 #define kParamOutputOrientationHint                                                     \
@@ -206,6 +212,7 @@ enum EParamCompression {
     eParamCompressionB44a,
     eParamCompressionDWAa,
     eParamCompressionDWAb,
+    eParamCompressionZSTD,
     eParamCompressionLZW,
     eParamCompressionCCITTRLE,
     eParamCompressionJPEG,
@@ -1055,6 +1062,9 @@ WriteOIIOPlugin::beginEncodeParts(void* user_data,
     case eParamCompressionDWAb: // EXR
         compression = "dwab";
         break;
+    case eParamCompressionZSTD: // EXR
+        compression = "zstd";
+        break;
     case eParamCompressionLZW: // TIFF
         compression = "lzw";
         break;
@@ -1669,6 +1679,17 @@ WriteOIIOPluginFactory::describeInContext(ImageEffectDescriptor& desc,
         }
     }
     {
+        IntParamDescriptor* param = desc.defineIntParam(kParamOutputZSTDCompressionLevel);
+        param->setLabel(kParamOutputZSTDCompressionLevelLabel);
+        param->setHint(kParamOutputZSTDCompressionLevelHint);
+        param->setRange(1, 22);
+        param->setDisplayRange(1, 22);
+        param->setDefault(kParamOutputZSTDCompressionLevelDefault);
+        if (page) {
+            page->addChild(*param);
+        }
+    }
+    {
         ChoiceParamDescriptor* param = desc.defineChoiceParam(kParamOutputOrientation);
         param->setLabel(kParamOutputOrientationLabel);
         param->setHint(kParamOutputOrientationHint);
@@ -1719,6 +1740,8 @@ WriteOIIOPluginFactory::describeInContext(ImageEffectDescriptor& desc,
         param->appendOption(kParamOutputCompressionOptionDWAa);
         assert(param->getNOptions() == eParamCompressionDWAb);
         param->appendOption(kParamOutputCompressionOptionDWAb);
+        assert(param->getNOptions() == eParamCompressionZSTD);
+        param->appendOption(kParamOutputCompressionOptionZSTD);
         assert(param->getNOptions() == eParamCompressionLZW);
         param->appendOption(kParamOutputCompressionOptionLZW);
         assert(param->getNOptions() == eParamCompressionCCITTRLE);
