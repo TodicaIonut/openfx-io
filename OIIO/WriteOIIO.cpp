@@ -1,6 +1,6 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * This file is part of openfx-io <https://github.com/NatronGitHub/openfx-io>,
- * (C) 2018-2021 The Natron Developers
+ * (C) 2018-2026 The Natron Developers
  * (C) 2013-2018 INRIA
  *
  * openfx-io is free software: you can redistribute it and/or modify
@@ -129,11 +129,11 @@ enum ETuttlePluginComponents {
     "Compression level for zip/deflate compression, on a scale from 1 (fastest, minimal compression) to 9 (slowest, maximal compression) [EXR, TIFF or Zfile w/ zip or zips comp.]"
 #define kParamOutputZIPCompressionLevelDefault 4
 
-#define kParamOutputZIPCompressionLevel "ZSTDCompressionLevel"
-#define kParamOutputZIPCompressionLevelLabel "ZSTD Compression Level"
-#define kParamOutputZIPCompressionLevelHint \
+#define kParamOutputZSTDCompressionLevel "ZSTDCompressionLevel"
+#define kParamOutputZSTDCompressionLevelLabel "ZSTD Compression Level"
+#define kParamOutputZSTDCompressionLevelHint \
     "Compression level for Zstandard compression, on a scale from 1 (fastest, minimal compression) to 22 (slowest, maximal compression) [EXR w/ ZSTD comp.]"
-#define kParamOutputZIPCompressionLevelDefault 5
+#define kParamOutputZSTDCompressionLevelDefault 5
 
 #define kParamOutputOrientation "orientation"
 #define kParamOutputOrientationLabel "Orientation"
